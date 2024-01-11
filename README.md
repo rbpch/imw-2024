@@ -2,3 +2,6 @@
 Repository for IMW
 
 Work in Progress for Interactive Media Web
+
+To Do List
+* Create an Index file
