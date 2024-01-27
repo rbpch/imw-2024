@@ -1,72 +1,422 @@
 /*Storybook CSS*/
 *{ 
-    margin: auto;
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
 }
 
 body {
-    background-color: #FEFEFE;
-}
-
-/*Typography*/
-h1 {
-    font-size: ;
-}
-
-/*Colors*/
-.red {
-    background-color: #CD242B;
-}
-
-.yellow {
-    background-color: #FFC80B;
-}
-
-.green {
-    background-color: #59AC40;
-}
-
-.grey {
-    background-color: #D9D9D9;
-}
-
-.brown {
-    background-color: #554F44;
-}
-
-/*Next Page*/
-.next-page {
-
-}
-
-/*Rainbow*/
-.first {
-    width: 300px;
-    height: 100px;
-    border: solid 7px #D9D9D9;
-    border-color: #D9D9D9 transparent transparent transparent;
-    border-radius: 50%/100px 100px 0 0;
-    grid-column-start: 2 / 7;
-    grid-column-end: 6 / 7;
-    grid-row-start: 2 / 5;
-    grid-row-end: 4 / 5;
-}
-
-.empty {
-    border: solid;
-    width: 100vw;
-    height: 75vw;
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F4F4F4;
     overflow: hidden;
 }
 
-.color-rainbow {
-    content: '';
+/*Typography*/
+p {
+    font-family: 'Playpen Sans', cursive;
+    font-size: 50px;
+    text-align: center;
     position: absolute;
-    width: 50%;
-    height: 100%;
-    border-radius: 50%;
-    left: 50%;
-    top: 50%;
-    box-shadow: 0 0 0 2vw #59AC40, 0 0 0 3vw #FEFEFE, 0 0 0 5vw #FFC80B, 0 0 0 6vw #FEFEFE, 0 0 0 8vw #CD242B;
+    margin: auto;
+    top: 80%;
 }
 
+mark.red {
+    color:#CD242B;
+    background: none;
+}
+
+mark.ylw {
+    color:#FFC80B;
+    background: none;
+}
+
+mark.colorful {
+    background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);  
+    background-clip: text;
+    color: transparent;
+}
+
+
+/*Rainbow*/
+.rainbow {
+    position: absolute;
+    width: 95vw;
+    height: 50vw;
+    overflow: hidden;
+    background: transparent;
+    transform: translate(-50vw, -16.666vw);
+    top: 9vw;
+    left: 50vw;
+  }
+
+.rainbow:after {
+    position: absolute;
+    content: '';
+    width: 50%;
+    height: 100%;
+    top: 25vw;
+    left: 25vw;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2vw #59AC40, 0 0 0 4vw #F4F4F4, 0 0 0 6vw #FFC80B, 0 0 0 8vw #F4F4F4, 0 0 0 10vw #CD242B, 0 0 0 12vw #F4F4F4;
+  }
+   
+  body {
+    margin: 0;
+  }
+
+  .sad-rainbow {
+    position: absolute;
+    width: 95vw;
+    height: 50vw;
+    overflow: hidden;
+    background: transparent;
+    transform: translate(-50vw, -16.666vw);
+    top: 9vw;
+    left: 50vw;
+  }
+
+  .sad-rainbow:after {
+    position: absolute;
+    content: '';
+    width: 50%;
+    height: 100%;
+    top: 25vw;
+    left: 25vw;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2vw #E7E7E7, 0 0 0 4vw #F4F4F4, 0 0 0 6vw #E7E7E7, 0 0 0 8vw #F4F4F4, 0 0 0 10vw #E7E7E7, 0 0 0 12vw #F4F4F4;
+  }
+   
+  body {
+    margin: 0;
+  }
+
+  .red-rainbow {
+    position: absolute;
+    width: 95vw;
+    height: 50vw;
+    overflow: hidden;
+    background: transparent;
+    transform: translate(-50vw, -16.666vw);
+    top: 9vw;
+    left: 50vw;
+  }
+
+  .red-rainbow:after {
+    position: absolute;
+    content: '';
+    width: 50%;
+    height: 100%;
+    top: 25vw;
+    left: 25vw;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2vw #E7E7E7, 0 0 0 4vw #F4F4F4, 0 0 0 6vw #E7E7E7, 0 0 0 8vw #F4F4F4, 0 0 0 10vw #CD242B, 0 0 0 12vw #F4F4F4;
+  }
+
+  .red-ylw-rainbow {
+    position: absolute;
+    width: 95vw;
+    height: 50vw;
+    overflow: hidden;
+    background: transparent;
+    transform: translate(-50vw, -16.666vw);
+    top: 9vw;
+    left: 50vw;
+  }
+
+  .red-ylw-rainbow:after {
+    position: absolute;
+    content: '';
+    width: 50%;
+    height: 100%;
+    top: 25vw;
+    left: 25vw;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2vw #E7E7E7, 0 0 0 4vw #F4F4F4, 0 0 0 6vw #FFC80B, 0 0 0 8vw #F4F4F4, 0 0 0 10vw #CD242B, 0 0 0 12vw #F4F4F4;
+  }
+
+/* Face */
+.eye-l {
+    content: '';
+    width: 3vmin;
+    height: 3vmin;
+    background: black;
+    position: absolute;
+    top: 50%;
+    left: 775px;
+}
+
+.eye-r {
+    content: '';
+    width: 3vmin;
+    height: 3vmin;
+    background: black;
+    position: absolute;
+    top: 50%;
+    left: 925px;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+.mouth {
+    align-items: center;
+    position: absolute;
+    width: 78px;
+    height: 80px;
+    border: 10px solid transparent;
+    top: 51%;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border-top-color: black;
+  }
+
+.smile {
+    align-items: center;
+    position: absolute;
+    width: 78px;
+    height: 80px;
+    border: 10px solid transparent;
+    top: 46%;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border-top-color: black;
+    transform: rotate(180deg);
+  }
+
+.laugh {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 20px solid black;
+    top: 51%;
+    align-items: center;
+    position: absolute;
+}
+
+.bling-l {
+    width: 3vmin;
+    height: 3vmin;
+    background: white;
+    top: 50%;
+    left: 775px;
+    box-shadow: inset -0.40vmin -0.50vmin 0 1.125vmin black;
+}
+
+.bling-r {
+    width: 3vmin;
+    height: 3vmin;
+    background: white;
+    top: 50%;
+    right: 42%;
+    box-shadow: inset -0.40vmin -0.50vmin 0 1.125vmin black;
+}
+
+/* Button */
+.button {
+    position: absolute;
+    background: #D9D9D9;
+    border-radius: 30px;
+    color: black;
+    font-family: 'Playpen Sans', cursive;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    padding: 10px 40px;
+    display: inline-block;
+    top: 89%;
+    text-decoration: none;
+}
+
+.guide::after {
+    content: 'Yes!';
+
+    transition: 50ms ease-in-out;
+}
+
+.guide:hover::after {
+    content: 'Search the colors with your cursor';
+    color: #CD242B;
+}
+
+.element {
+    opacity: 0;
+}
+
+.element:hover {
+    opacity: 0.5;
+}
+
+.bubble {
+    font-family: 'Playpen Sans', cursive;
+    font-size: 25px;
+    text-align: center;
+    padding: 10px 40px;
+    display: inline-block;
+    background: #D9D9D9;
+    position: absolute;
+    top: 10%;
+    right: 25%;
+	border-radius: 15px;
+    color: black;
+
+    text-decoration: none;
+}
+
+
+.bubble:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-top-color: #D9D9D9;
+	border-bottom: 0;
+	border-left: 0;
+	margin-left: -10px;
+	margin-bottom: -20px;
+    text-decoration: none;
+}
+
+/* Elements*/
+.leaf {
+    width: 100px;
+	height: 100px;
+	border-radius: 0 90px;
+	background-color: #59AC40;
+	transform: rotate(0deg);
+
+    position:absolute;
+    display: flex;
+    top: 80%;
+    left: 5%;
+}
+
+.sun {
+    --s:20px; /* length */
+    --o:10px; /* offset */
+    --w:6deg; /* thickness */
+    --n:8;    /* numbers*/
+    --c:#FFC80B;/* color */
+    
+    width:100px;
+    height:100px;
+    background-color: #FFC80B;
+    border-radius:50%;
+    position:absolute;
+
+    display: flex;
+    top: 15%;
+    left: 10%;
+  }
+
+  .sun::before {
+    content:"";
+    position:absolute;
+    top:    calc(-1*var(--s) - var(--o));
+    bottom: calc(-1*var(--s) - var(--o));
+    left:   calc(-1*var(--s) - var(--o));
+    right:  calc(-1*var(--s) - var(--o));
+    border-radius:inherit;
+    background:repeating-conic-gradient(from calc(-1*var(--w)/2), var(--c) 0 calc(var(--w) - 2deg),transparent calc(var(--w)) calc(360deg/var(--n) - 2deg),var(--c) calc(360deg/var(--n)));
+    -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - var(--s)),#fff calc(100% - var(--s)));
+            mask:radial-gradient(farthest-side,transparent calc(100% - var(--s)),#fff calc(100% - var(--s)));
+  }
+
+/* strawberry */
+
+.strawberry {
+    content: '';
+    position: absolute;
+    border-radius: 61% 62% 70% 52% / 74% 65% 51% 20%;
+    width: 100px;
+    height: 100px;
+    background: #CD242B;
+
+    display: flex;
+    top: 30%;
+    right: 10%;
+
+  }
+
+.strawberry:hover::before {
+    opacity: 100%;
+}
+
+.strawberry::before {
+    opacity: 0%;
+}
+
+.seed {
+    width: 7px;
+    height: 7px;
+    background: black;
+    margin: 6px 7px;
+    border-radius: 66% 40% 84% 10% / 88% 11% 90% 10%;
+}
+
+.row {
+    display: flex;
+}
+
+.seeds {
+    display: flex;
+    flex-direction: column;
+    padding-top: 13px;
+    left: 10%;
+    justify-content: center;
+  }
+
+.s-leaf {
+  position: relative;
+  right: 10%;
+  width: 20px;
+  height: 20px;
+  border-radius: 0% 100% 0% 28% / 0% 100% 0% 100% ;
+  transform: rotate(80deg) translate(0px,-13px);
+  background: #59AC40;
+}
+
+.s-leaf-2 {
+    position: relative;
+    right: 15%;
+    width: 30px;
+    height: 30px;
+    border-radius: 0% 100% 0% 28% / 0% 100% 0% 100% ;
+    transform: rotate(80deg) translate(0px,-13px);
+    background: #59AC40;
+  }
+
+  body {
+    margin: 0;
+    overflow: hidden;
+  }
+
+
+/* Resources 
+https://stackoverflow.com/questions/27730476/css-design-rainbow
+https://css-tricks.com/the-shapes-of-css/
+https://www.youtube.com/watch?v=TPc03KcidIo
+https://codepen.io/tmrDevelops/pen/NPXodB
+https://www.shecodes.io/athena/75845-how-to-remove-underline-in-a-button
+https://codepen.io/datasmartteacher/pen/bGVoZJg
+https://www.youtube.com/watch?v=NQUPAm-QluA
+
+leaf
+https://codepen.io/yochans/pen/vYxPdKz
+
+sun
+https://stackoverflow.com/questions/62403621/how-can-i-create-sun-like-lines-around-a-circle
+
+strawberry
+https://smokinclove.github.io/writeups/drawing-a-strawberry-with-css-border-radius-and-gradient/
+
+TRANSPARENTNTNNTNT
+https://www.shecodes.io/athena/113-how-to-create-transparent-elements-with-css
+*/ 

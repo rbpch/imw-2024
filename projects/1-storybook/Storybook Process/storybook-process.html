@@ -1,0 +1,687 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Storybook Process</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="fc78974c-7018-463a-ba9c-7357fa4e3e6b" class="page mono"><header><h1 class="page-title">Storybook Process</h1><p class="page-description"></p></header><div class="page-body"><nav id="b8b56d18-578b-4519-902b-2eecd209eed2" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a25e4abb-b85e-4355-9750-e95879ab9022">Project Brief </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#598b7fd6-ba22-4136-8b4b-be9c1c256c21">Expectations</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#35db7303-5cb3-4a32-8505-6e31611c6385">Ideation </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cdb59f4e-9a71-4890-b83d-ecec95f05335">Visual Research</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e5efa5ca-21fb-4173-8f52-87de323282ae">Storyboard </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#566098fd-2bdf-4b82-88f3-801368b9407a"><mark class="highlight-purple">1st Attempt: Fishing</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ebd89312-aaf9-4743-b845-cf26c46184b1"><mark class="highlight-purple">2nd Attempt: Rainbow (Failed)</mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#75078d3d-8c6c-41df-89d0-fa49538add41"><mark class="highlight-purple">3rd Attempt: Rainbow (OK!)</mark></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#23cac8f5-0a08-4a49-a261-411dcb06b52d">Coding </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0096469f-da47-425b-b291-e6a476de23ed">Resources </a></div></nav><h1 id="a25e4abb-b85e-4355-9750-e95879ab9022" class="block-color-purple_background">Project Brief </h1><ul id="95cc1a34-48f1-463f-bba5-9a25e4ee7e4e" class="bulleted-list"><li style="list-style-type:disc">Create a visual narrative in the form of a website.<p id="b13bc19e-faf0-46cd-9083-f8b24d107690" class="">→ To become comfortable with the use of code to create visual forms and to push the limits of CSS as a drawing medium.</p></li></ul><ul id="a298ae50-bab4-4a55-b87a-2b60f0cc4a0f" class="bulleted-list"><li style="list-style-type:disc">Requirements<ul id="e9184c6f-bd98-4e4e-ba56-d2df5cba414c" class="bulleted-list"><li style="list-style-type:circle">Only HTML &amp; CSS.</li></ul><ul id="a2b44a97-a8e7-4110-9a82-bb8dff55056c" class="bulleted-list"><li style="list-style-type:circle">All visuals made with CSS. Absolutely no images (GIF, PNG, JPEG, WebP or SVG).</li></ul><ul id="b9cf7cc0-bb05-4b8f-8f8e-c3f8a022d892" class="bulleted-list"><li style="list-style-type:circle">Minimum three frames/pages.</li></ul></li></ul><h3 id="598b7fd6-ba22-4136-8b4b-be9c1c256c21" class="block-color-purple">Expectations</h3><ul id="76e00228-32ea-479d-a2bf-5b52b738f4fa" class="bulleted-list"><li style="list-style-type:disc">I have no experiences with coding, so I knew it would be difficult to start because I am afraid of it ^^;; (Still procrastinate on working on it so handed in late… 🙇)</li></ul><ul id="a45cc19e-2150-4dd9-9dea-f005a48ec30c" class="bulleted-list"><li style="list-style-type:disc">I want to keep it simple by<ul id="047f016f-9a78-4eaf-94e1-8f909b14c568" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-default">considering the </mark><mark class="highlight-default"><strong>use of colour, simple lines and graphics</strong></mark></li></ul><ul id="4bfc6c93-ee95-48ee-9265-eb67ddd22b01" class="bulleted-list"><li style="list-style-type:circle"><strong>use as few words as possible</strong></li></ul></li></ul><h1 id="35db7303-5cb3-4a32-8505-6e31611c6385" class="block-color-purple_background">Ideation </h1><p id="b9a39edb-bc88-4131-85c9-6d937ae9bece" class="">I sketches different ideas for the story:</p><div id="76d704ef-64f3-4065-b580-beca61db4de2" class="column-list"><div id="ed7ba748-69a3-4b33-88f6-040270d0c77f" style="width:50%" class="column"><figure id="971dec84-95c3-4771-b4d3-780a5ddaa45c" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/IMG_4928.png"><img src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/IMG_4928.png"/></a><figcaption>Collecting balloons → Fly :D</figcaption></figure><figure id="d06018f8-47ab-42d5-a237-b6fb2a3a33a6" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/IMG_4932.png"><img style="width:3024px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/IMG_4932.png"/></a><figcaption>Fishing</figcaption></figure><p id="5425b173-c2cc-49ab-8bfd-8eeb0c1de67d" class="">I started with the fishing idea, but gave up later. More in the ‘storyboard’ part.</p></div><div id="18951b4f-6cc8-42fc-b9a0-fb293e74816a" style="width:50%" class="column"><figure id="daa5b3bc-5f1f-443b-b3d3-74b2c8ecc18d" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/IMG_4930.png"><img style="width:4032px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/IMG_4930.png"/></a><figcaption>The classic Newton Apple story (but an Apple product falls instead of an apple ^^;;)</figcaption></figure><p id="31635797-5da2-4966-bca4-eb97fc17bf2e" class="">
+</p><figure id="63dc2851-6aee-4a1f-a815-98b08f662b76" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/IMG_4931.png"><img style="width:4032px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/IMG_4931.png"/></a><figcaption>Something about the moon</figcaption></figure></div></div><div id="06b8b4c4-d955-4f6b-95e6-866695f3af3d" class="column-list"><div id="cd65efca-70c8-4482-b658-6ee3f1fc3468" style="width:50%" class="column"><p id="50982698-4a8a-4cb3-bd35-425b870c1265" class=""><mark class="highlight-purple"><strong>The final pick →</strong></mark></p><p id="cde68fb3-b967-4c29-96c6-f4b59c3805e5" class="">
+</p><p id="61c25d06-71f8-4927-a018-81da6754a7b4" class="">It’s a story about a rainbow losing its colours, and we have to help it find the colours back.</p><p id="adaad5cf-1d50-4fd0-848c-dfa93d1ea33c" class="">
+</p><p id="5b9a502e-51d3-4a7c-b5ff-f81082615406" class="">Rainbow losing colours = When I’m sad</p><p id="f0840b7a-f4a9-41aa-a00d-9c5d42a89644" class="">The objects that bring back the colours = things that make me happy :D</p><p id="6a732487-b502-421b-8cc0-54cde0257b25" class="">
+</p></div><div id="eb857f66-07bd-48b8-a682-2ccf81664154" style="width:50%" class="column"><figure id="3fbe0a6c-81fa-4f88-8fa0-e54212719bb3" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/IMG_4929.png"><img style="width:4032px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/IMG_4929.png"/></a></figure></div></div><h1 id="cdb59f4e-9a71-4890-b83d-ecec95f05335" class="">Visual Research</h1><p id="81d67989-2b10-4c20-a873-d7e572e3fb26" class="">For the graphic elements (how to tell a compelling story using simple shapes like circles)</p><div id="a9057c01-bc08-42ca-8d00-8c7de874cf05" class="column-list"><div id="d0392916-48bd-43c5-8a3b-14767b553967" style="width:50%" class="column"><figure id="4dc2522d-38cd-4728-a079-b216e7c60f2e" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled.png"><img style="width:564px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled.png"/></a><figcaption>Derek Zheng</figcaption></figure></div><div id="a93c8435-5767-49e6-8b28-a93ee5213ddb" style="width:50%" class="column"><figure id="882a877c-63f3-4cfa-9ee2-d6e4591be69b" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%201.png"><img style="width:563px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%201.png"/></a><figcaption><a href="https://www.behance.net/gallery/94473891/Sisyphus-Happy">https://www.behance.net/gallery/94473891/Sisyphus-Happy</a></figcaption></figure></div></div><figure id="0a11c4d1-040d-4957-904a-eb65d88dad7d" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%202.png"><img style="width:720px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%202.png"/></a><figcaption><a href="https://www.giacomobagnara.com/">https://www.giacomobagnara.com/</a></figcaption></figure><p id="40483cfc-a7ca-4862-b13b-082fd712de65" class="">
+</p><p id="86f3f77a-5a49-4fd2-9b14-e836dd1f7c0b" class="">I like the atmosphere in these images using simple palettes and compositions.</p><div id="5ab8fc90-ea4f-471b-8606-6c170d2cb45f" class="column-list"><div id="242271ee-a0b3-4f90-a492-3c5b6a4ba406" style="width:50%" class="column"><figure id="49446cc8-ccc4-4d17-8aa1-8c4184c06ce0" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%203.png"><img style="width:564px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%203.png"/></a></figure></div><div id="31b3cb16-22eb-49b9-829d-cc80e7f9e153" style="width:50%" class="column"><figure id="2736e1d5-1a9e-4660-8f3b-e0a4b081288e" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%204.png"><img style="width:564px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%204.png"/></a></figure></div></div><div id="7e60f4d2-0d0d-4e04-8b68-c16fced5a427" class="column-list"><div id="9172b68c-74d1-4545-b781-13e23039609b" style="width:33.333333333333336%" class="column"><figure id="ec0043d6-87d6-4827-8d03-f4bbcaa83d49" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%205.png"><img style="width:564px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%205.png"/></a></figure></div><div id="64c78f40-0a0f-44e6-a0b3-e764e9431a10" style="width:33.333333333333336%" class="column"><figure id="abdc5e9d-d3b4-49c3-b9f1-5705ab128349" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%206.png"><img style="width:563px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%206.png"/></a></figure></div><div id="30597fc2-fd31-4b4e-9958-3120b6aceabc" style="width:33.33333333333333%" class="column"><figure id="dc315109-56ed-45f6-b90c-266fd424d7b7" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%207.png"><img style="width:499px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%207.png"/></a></figure></div></div><p id="b6e048a0-78d8-4153-baec-503c7b0c0f68" class="">
+</p><p id="087b23b4-dd1f-42b7-bd81-1d0d3173d146" class="">I also looked through the past works from the students in 2023 class. Here are a few examples that helped me a lot in thinking about how to balance my story and the level of coding that I can handle:</p><figure id="0da93b36-685c-424d-bb5d-42143bb46264" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%208.png"><img style="width:3456px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%208.png"/></a><figcaption><a href="http://christywangdesign.com/projects/storybook/storybook.html">http://christywangdesign.com/projects/storybook/storybook.html</a></figcaption></figure><figure id="661c1a90-8c15-46cd-838a-a1a76f8783ca" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%209.png"><img style="width:3456px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%209.png"/></a><figcaption><a href="http://jiayundesign.online/projects/storybook/storybook.html">http://jiayundesign.online/projects/storybook/storybook.html</a></figcaption></figure><h1 id="e5efa5ca-21fb-4173-8f52-87de323282ae" class="block-color-purple_background">Storyboard </h1><h3 id="566098fd-2bdf-4b82-88f3-801368b9407a" class=""><mark class="highlight-purple">1st Attempt: Fishing</mark></h3><div id="dd1d6675-d26d-47c7-8ae7-ccd4f4d4b4da" class="column-list"><div id="504e0b00-4472-43b4-a37b-f7208e55d4ae" style="width:62.5%" class="column"><figure id="9af157b3-96bd-4a39-9d63-3ae9a6376a33" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%2010.png"><img style="width:1304px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%2010.png"/></a></figure></div><div id="ea3486e0-5be3-4e7f-98e9-e4eec7183e65" style="width:37.50000000000001%" class="column"><p id="463e3652-96b7-42e6-b1ac-ab5191857fbf" class="">OK I didn’t notice I gave up on this idea so quickly that it has only one frame &gt;&lt;</p><p id="1d6b6b9d-551e-4004-a58e-13b96b5cd3e3" class="">But I can’t draft the scene that I’m satisfied with, and I got frustrated &amp; left the project for a few days._.</p></div></div><h3 id="ebd89312-aaf9-4743-b845-cf26c46184b1" class=""><mark class="highlight-purple">2nd Attempt: Rainbow (Failed)</mark></h3><figure id="636b05bf-a9f5-4ede-84fd-769d7217426e" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%2011.png"><img style="width:1862px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%2011.png"/></a></figure><p id="0abb8e36-e06b-4c58-b4f0-ed893b652acf" class="">I tried brainstorming new stories, but I realized I shouldn’t waste so much time thinking of a new one. Instead, I flipped through the drafts and chose the Rainbow story to work on. Although I haven’t started the coding part, I feel more accomplished after finishing the storyboards.</p><h3 id="75078d3d-8c6c-41df-89d0-fa49538add41" class=""><mark class="highlight-purple">3rd Attempt: Rainbow (OK!)</mark></h3><p id="841cc7ee-042d-4929-b8b0-92762824a562" class="">After I started working on the codes, I found the process too complicated for me. So I tried to reduce the frames but keep the framework of the story. Here is the final storyboard:</p><figure id="fb4124e3-7d93-43e5-be2e-db49d87130c7" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%2012.png"><img style="width:1928px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%2012.png"/></a></figure><p id="b79ac341-29f0-4915-97b2-6fb5f26d6090" class="">
+</p><h1 id="23cac8f5-0a08-4a49-a261-411dcb06b52d" class="block-color-purple_background">Coding </h1><p id="51c2992a-95e2-429f-aa01-18ad0001b21c" class="">(I forgot to screenshot the process) I didn’t know where to start. So I started with the basic HTML and CSS set-up, such as incorporating the font from Google Font.</p><p id="9746ee18-2726-42d0-bd12-ef3d910c0058" class=""><br/>Some parts that I <br/><mark class="highlight-red"><strong>struggle</strong></mark> the MOST:</p><ul id="93b95601-55a2-4a7a-ac6e-3de2ed5f1c85" class="bulleted-list"><li style="list-style-type:disc">I gave up the handdrawn effect of the rainbow…</li></ul><ul id="cf8153f9-66c4-488e-9b15-70c47fb8720d" class="bulleted-list"><li style="list-style-type:disc">I tried different methods to hide the object and make them appear when hovering<ul id="7938d309-3588-425e-b3af-6ed03af6ecdd" class="bulleted-list"><li style="list-style-type:circle">but then at last it’s a very simple code :D (thank you: <a href="https://www.shecodes.io/athena/113-how-to-create-transparent-elements-with-css">https://www.shecodes.io/athena/113-how-to-create-transparent-elements-with-css</a>)<figure id="8aacbe65-0296-4f2c-b5aa-da5a50705719" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%2013.png"><img style="width:306px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Untitled%2013.png"/></a></figure></li></ul></li></ul><p id="e928b69c-5535-478b-a44e-93fb15122bae" class="">
+</p><div id="5610ebe6-db7b-43d6-a066-9d591ca32e98" class="column-list"><div id="9a7b94f8-c1c9-4c8b-813f-fc3f8929c990" style="width:50%" class="column"><figure id="0f299ac5-fa61-4e13-829b-54843992fbac" class="image"><a href="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Screenshot_2024-01-26_at_4.16.40_PM.png"><img style="width:3456px" src="Storybook%20Process%20fc78974c7018463aba9c7357fa4e3e6b/Screenshot_2024-01-26_at_4.16.40_PM.png"/></a></figure></div><div id="d4ac6ffb-b611-48bb-8559-f0678f4b5015" style="width:50%" class="column"><p id="084a63a1-311b-4a57-a75f-3f1a97a5303d" class="">I rely a lot on online tutorials. But I also learnt a lot after figuring out how they actually code to make things happen.</p><p id="803e1b7a-2400-4b90-a296-3dc4fb1ae9b6" class="">
+</p><p id="516e5d32-921e-466d-932d-b16ca12b378d" class="">My css file turns out to be a mess. I think I have to organize them better next time for the projects.</p></div></div><p id="afe403dd-2348-4f73-a693-24dab92c6466" class="">Although it’s not a complicated web, I think it’s a miracle for me to complete it (although late 🧎) after 2 weeks of lessons! The moment you refresh the page and see the ideal effect is the best part :DDDDDDD!!!</p><h1 id="0096469f-da47-425b-b291-e6a476de23ed" class="block-color-purple_background">Resources </h1><p id="38c28b95-ac0b-4984-87a1-38ba4456b844" class="">(My life-savers)</p><p id="67aaeb41-dd86-4d95-a2ad-38d32f6e10c8" class="">
+</p><p id="b53a7c4a-cf5e-4d42-9d59-d017101c3d0f" class=""><a href="https://stackoverflow.com/questions/27730476/css-design-rainbow">https://stackoverflow.com/questions/27730476/css-design-rainbow</a> </p><p id="f3654358-cfcd-4940-997a-0d4b04219f36" class=""><a href="https://css-tricks.com/the-shapes-of-css/">https://css-tricks.com/the-shapes-of-css/</a> </p><p id="3e409d20-165d-4372-92ab-9c10c3729b2a" class=""><a href="https://www.youtube.com/watch?v=TPc03KcidIo">https://www.youtube.com/watch?v=TPc03KcidIo</a> </p><p id="0600ebc4-97fe-4af4-97af-3ec0b74129d5" class=""><a href="https://codepen.io/tmrDevelops/pen/NPXodB">https://codepen.io/tmrDevelops/pen/NPXodB</a> </p><p id="6d987afc-ba9b-4c57-b2bf-51ecc74c5ca6" class=""><a href="https://www.shecodes.io/athena/75845-how-to-remove-underline-in-a-button">https://www.shecodes.io/athena/75845-how-to-remove-underline-in-a-button</a> </p><p id="47c8a49e-f72a-42b1-9e67-eb7014a1d57b" class=""><a href="https://codepen.io/datasmartteacher/pen/bGVoZJg">https://codepen.io/datasmartteacher/pen/bGVoZJg</a> </p><p id="33fb8017-4a27-4776-9bbd-999a39e869b8" class=""><a href="https://www.youtube.com/watch?v=NQUPAm-QluA">https://www.youtube.com/watch?v=NQUPAm-QluA</a> </p><p id="c0ef7207-2a68-438d-8a44-6126ba5c06cb" class=""><a href="https://codepen.io/yochans/pen/vYxPdKz">https://codepen.io/yochans/pen/vYxPdKz</a> </p><p id="07bf88d5-8744-4f84-aed7-3db5f988c35f" class=""><a href="https://stackoverflow.com/questions/62403621/how-can-i-create-sun-like-lines-around-a-circle">https://stackoverflow.com/questions/62403621/how-can-i-create-sun-like-lines-around-a-circle</a> </p><p id="e7733fca-fc91-4a1d-b418-24b4d4bf606e" class=""><a href="https://smokinclove.github.io/writeups/drawing-a-strawberry-with-css-border-radius-and-gradient/">https://smokinclove.github.io/writeups/drawing-a-strawberry-with-css-border-radius-and-gradient/</a> </p><p id="4be5a53d-4fc9-49ff-a292-55eedfb60356" class=""><a href="https://www.shecodes.io/athena/113-how-to-create-transparent-elements-with-css">https://www.shecodes.io/athena/113-how-to-create-transparent-elements-with-css</a> </p><p id="031ea36f-5d9a-4a20-97b2-2fabfee044a8" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
