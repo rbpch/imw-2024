@@ -1,0 +1,686 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Poster Process</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4c40f512-0cae-4b92-99db-50023f2e91c1" class="page mono"><header><h1 class="page-title">Poster Process</h1><p class="page-description"></p></header><div class="page-body"><nav id="b630bf2d-fbd1-467e-9b87-c9a9dceb6d8a" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f84a5651-7ca1-4355-917a-61a6c1c5abef">Project Description </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#83b378f0-845c-463f-890e-143de20fcd51">Choosing the Content Package</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e9422751-a034-49a8-bd75-751dff348f22">Research </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c54ffea2-02fc-477f-bb27-645ccb2355b2">&lt;!—Content—&gt;</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#75ea1c87-40cd-4984-a308-b90223f4933a">Visual Research </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c40d52bd-ec00-4691-b50b-405ccd319cb3">Concept </a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e05d4376-5b8e-4698-9a68-c123c9881997">Challenges</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1b3d24a0-aaf4-4892-8128-6c5158be029d">References</a></div></nav><h1 id="f84a5651-7ca1-4355-917a-61a6c1c5abef" class="block-color-purple_background">Project Description </h1><h3 id="83b378f0-845c-463f-890e-143de20fcd51" class="block-color-purple">Choosing the Content Package</h3><ul id="fbbe5b11-8111-4478-b2f1-b1258d6e229c" class="bulleted-list"><li style="list-style-type:disc">I skimmed the content packages and picked the <a href="https://canvascloud.ocadu.ca/courses/8027/files/?preview=2808567">Through Post-Atomic Eyes</a> package.<ul id="915fb310-5416-4ceb-9a37-1737ec88a43c" class="bulleted-list"><li style="list-style-type:circle">Keywords: Lens, Nuclear, Atom<ul id="a8582638-0d07-49d9-82fe-9339809e46d4" class="bulleted-list"><li style="list-style-type:square">I think can create interesting results</li></ul><ul id="09ddad48-717b-4921-8428-4a19327d608c" class="bulleted-list"><li style="list-style-type:square">A clear theme for the web</li></ul></li></ul><ul id="5e92b256-5b51-4d4a-bcb9-135e7ef3bbb0" class="bulleted-list"><li style="list-style-type:circle">Speakers List<ul id="71d27848-0df2-45b7-a6fc-bbe179d9eb12" class="bulleted-list"><li style="list-style-type:square">I think can play with the interactive elements with so many names</li></ul></li></ul></li></ul><h1 id="e9422751-a034-49a8-bd75-751dff348f22" class="block-color-purple_background">Research </h1><h2 id="c54ffea2-02fc-477f-bb27-645ccb2355b2" class="">&lt;!—Content—&gt;</h2><p id="2e5bc467-194f-4adb-b78f-5e36cb6c85ce" class=""><strong>Through Post-Atomic Eyes</strong></p><div id="2e7da7c3-2c96-4f45-805b-fe766b78e490" class="column-list"><div id="b1283919-f04c-42a8-994f-e8fc8fc74b7c" style="width:50%" class="column"><p id="c05fd3bd-26ce-48d4-b485-0534ce3a29f1" class=""><em>Through Post-Atomic Eyes</em> brings together an <mark class="highlight-purple">interdisciplinary</mark> <br/>group of artists and scholars to explore the complex legacy of the <br/><br/><mark class="highlight-purple">atomic age</mark> in <mark class="highlight-purple">contemporary art and culture</mark>. </p><p id="eeb7b627-3f26-42e9-b5c3-96c09ce974a8" class="">In what ways do <mark class="highlight-purple">photography </mark>and other <mark class="highlight-purple">lens-based art practice</mark>s shed light on this legacy in the 21st century, and how has atomic culture shaped <mark class="highlight-purple">contemporary intersections of photography, nuclear industries, and military techno-cultures</mark>? </p><p id="2508c49d-f9d1-4d61-8ae6-79b948047ed7" class="">Join us as we explore some of the most <mark class="highlight-purple">urgent</mark> issues of our time, from <br/>climate change and the Anthropocene to surveillance culture and the <br/>advent of drone warfare, through a post-atomic lens.<br/></p><figure id="2d2c4ad5-6289-4252-8baa-57f749e4ae2a" class="image"><a href="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled.png"><img style="width:384px" src="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled.png"/></a><figcaption><strong>Atomic Bomb Damage</strong>: Wristwatch Stopped at 11:02, August 9, 1945, Nagasaki, 1961 (printed 1980) — <em>Shomei Tomatsu</em></figcaption></figure><ul id="126af8d3-c7c1-453e-a449-64b89f4908fd" class="bulleted-list"><li style="list-style-type:disc">photography has its own language, independent of words</li></ul><ul id="e01b0dfd-bbd1-48cc-90aa-7f620eadb03d" class="bulleted-list"><li style="list-style-type:disc"><em>Provoke</em> argued that the photographer can capture what cannot be<br/>expressed in words, presenting photographs as &quot;documents&quot; for others to<br/>read.  In Japanese, the visual style of the photographs in <br/><em>Provoke</em> has been described as: &#x27;<strong>are-bure-boke</strong>&#x27;, which translates as &#x27;<strong>grainy/rough, blurry, out-of-focus</strong>&#x27;.</li></ul><p id="24896732-c532-4265-b2d2-124b40d9ee63" class="">
+</p><blockquote id="02c42165-0b3f-46ae-aa3c-9f311ab5cd30" class="">The features of this style can be listed: <mark class="highlight-purple"><strong>fragmentariness</strong></mark>, a sense of <br/>speed, images appearing to be damaged, wildness, traces, a sense of <br/>unbalance, printing failures, time-lapse, scraps of negatives, scenes <br/>that come out of the dark only through the flash, no viewfinder etc. <br/>These are all expressions of a kind of ‘<br/><strong>subtraction</strong>’, a means to erase <br/>the photographer’s self, his thoughts, subjective expressions and <br/>intentions. In other words, the photographs try to not see, not to think and not to choose […] To Moriyama, grainy, blurry, out-of-focus was an important method of deletion, but only in order to show the real world as it was. In other words, grainy, blurry, out-of-focus reveals the scars left after the membrane of the fake reality has been taken off in order to hollow out the ‘real’ existence. This real world, then, is expressed through violence towards the photographs. The more real the photographs are, the more scars they have, the more they are worn away. The real world can only appear if the usual world disappears.<br/><p id="a54e5d60-8f2e-47b0-aba6-eae120b555d7" class="">–</p><p id="cc992730-1666-48d4-9642-aa63de89ae27" class=""><strong>Minoru Shimizu</strong>, Grainy, Blurry, Out-of-Focus: Daido Moriyama&#x27;s &#x27;Farewell Photography</p></blockquote></div><div id="73097400-1f82-4345-bfcb-a5cf3cade448" style="width:50%" class="column"><p id="54eac151-37ba-40d7-ad97-72779fbe4e6b" class="">“One way in which photography and lens-based art have addressed the legacy of the atomic age is by <mark class="highlight-purple"><strong>documenting</strong></mark> the physical and environmental effects of nuclear testing and disasters. Photographers have captured the <mark class="highlight-purple"><strong>aftermath</strong></mark> of nuclear bombings in Hiroshima and Nagasaki, as well as the environmental devastation caused by nuclear accidents such as the Chernobyl and Fukushima disasters. These images serve as powerful reminders of the destructive power of nuclear technologies and their long-lasting impact on communities and ecosystems.</p><p id="f6d1ad62-b75e-4627-b6b7-a8125ba0cd21" class="">Furthermore, lens-based art practices have also been used to explore the psychological and cultural impact of living in the atomic age. Artists have used photography and video art to depict the <mark class="highlight-purple"><strong>fear and anxiety</strong></mark> surrounding the threat of <strong>nuclear warfare</strong>, as well as the ways in which nuclear technologies have shaped popular culture and collective memory. These works often highlight the complex and contradictory attitudes towards nuclear power, from its association with progress and modernity to its potential for <strong>mass destruction</strong>.”</p><p id="fce7644b-bdec-4040-a3d4-31483a16beeb" class=""><em>Generated by Chat GPT 3.5</em></p><figure id="11b2f2ad-37e3-4cba-a60b-89ff3b22b111" class="image"><a href="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%201.png"><img style="width:640px" src="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%201.png"/></a><figcaption><strong>Provoke </strong>—<strong> </strong><em>Takuma Nakahira and Yutaka Takanashi</em></figcaption></figure><p id="e4cbec4d-5ca9-4a17-8187-53d357424ac9" class="">
+</p></div></div><hr id="a194546e-eab4-4692-b5f4-dab76613f78d"/><p id="3a97bf29-3f08-4ca5-8f62-70f20c1ea2cb" class=""><strong>Toronto, October 23-25</strong></p><p id="788f9a9c-8330-44bb-a62c-ee9b7aabf35d" class="">
+</p><p id="0f82f4fe-09de-492d-9606-edd9b014e63e" class=""><strong>Schedule at a glance</strong> </p><ul id="e6b129f8-f9f1-435b-9867-2c8bc373f575" class="bulleted-list"><li style="list-style-type:disc">Friday 23 October, 9 am to 6:30 pm: Panel presentations at OCAD University, 100 McCaul Street (main auditorium)</li></ul><ul id="c7a324b7-7de7-46d6-8559-fc85bba85ead" class="bulleted-list"><li style="list-style-type:disc">Saturday 24 October, 9 am to 6 pm: Panel presentations at Northrop Frye 003, Victoria College, University of Toronto</li></ul><ul id="f2a06c7f-dcbc-4bb5-bc8e-6831aa928e34" class="bulleted-list"><li style="list-style-type:disc">Saturday 24 October, 6 to 8 pm: Public reception at Alumni Hall, Victoria College, University of Toronto</li></ul><ul id="2f771c74-7c02-493f-afc7-1abcfba49409" class="bulleted-list"><li style="list-style-type:disc">Sunday 25 October, 10 am to 12 pm: Graduate workshop at OCAD University, 100 McCaul Street (by registration only)</li></ul><ul id="a63c9d62-9094-4bf7-99f8-ec5fbe0f340b" class="bulleted-list"><li style="list-style-type:disc">Sunday 25 October, 4 - 6 pm: Through Post-Atomic Eyes:<br/>Catastrophe and Armageddon in Artists’ Films. Special screening at<br/>Jackman Hall, Art Gallery of Ontario<br/></li></ul><p id="f8ced53b-8498-4a17-a89a-b8b604a54347" class="">
+</p><p id="3c9a1d27-d3b1-4883-988e-5debd736a10b" class=""><strong>Speakers</strong></p><ul id="1a652aad-728f-44b2-b74e-4e179fe11214" class="bulleted-list"><li style="list-style-type:disc">Karen Barad</li></ul><ul id="1d9cb9db-866c-44b5-aad1-c2e865f5b011" class="bulleted-list"><li style="list-style-type:disc">Iain Boal</li></ul><ul id="a5b3af38-c80f-45e6-8b25-b8a45879c08e" class="bulleted-list"><li style="list-style-type:disc">James Bridle</li></ul><ul id="886c4175-a41f-4c53-92a8-4234e08d2396" class="bulleted-list"><li style="list-style-type:disc">Eric Cazdyn</li></ul><ul id="b8e8f7fb-94b4-48ff-b026-8f242c1b943a" class="bulleted-list"><li style="list-style-type:disc">Robert Del Tredici</li></ul><ul id="267ee80d-a02d-49f6-9f3e-6b60cd9d7c9b" class="bulleted-list"><li style="list-style-type:disc">Matthew Farish</li></ul><ul id="0d293ee8-773e-4a92-b3a8-339e3ccb8207" class="bulleted-list"><li style="list-style-type:disc">Blake Fitzpatrick</li></ul><ul id="89f7c36d-66ad-4624-930a-718bdbe8602d" class="bulleted-list"><li style="list-style-type:disc">Derek Gregory</li></ul><ul id="c0206e74-e141-4ad0-ae45-324474ac9c7b" class="bulleted-list"><li style="list-style-type:disc">Kyo Maclear</li></ul><ul id="7016a4ae-5dd9-42b5-81e5-984a224802ab" class="bulleted-list"><li style="list-style-type:disc">Joseph Masco</li></ul><ul id="d237d413-4298-4613-9b65-ba4af7450b93" class="bulleted-list"><li style="list-style-type:disc">Karla McManus</li></ul><ul id="7ca44a21-d089-46ab-a007-cd01c6510f1a" class="bulleted-list"><li style="list-style-type:disc">Rehab Nazzal</li></ul><ul id="443fc876-b8cc-47ce-bb12-307c0743aa96" class="bulleted-list"><li style="list-style-type:disc">Public Studio</li></ul><ul id="2d8ed89c-3b5d-46d4-bda4-536cf9d956f3" class="bulleted-list"><li style="list-style-type:disc">Julie Salverson</li></ul><ul id="095f0461-8109-4d51-bc04-453da55ab0e7" class="bulleted-list"><li style="list-style-type:disc">Susan Schuppli</li></ul><ul id="e3b73196-906f-42ae-ac68-e5eec026efd7" class="bulleted-list"><li style="list-style-type:disc">Charles Stankievech</li></ul><ul id="8501b6a8-da8c-4535-9fc3-7ea8f6729a09" class="bulleted-list"><li style="list-style-type:disc">Kate Steinmann</li></ul><ul id="e739c64e-6942-4341-a0f7-e571c33bac93" class="bulleted-list"><li style="list-style-type:disc">Peter C. Van Wyck</li></ul><ul id="76110f9a-eac8-4727-8716-fbe84537e39d" class="bulleted-list"><li style="list-style-type:disc">Eyal Weizman</li></ul><p id="fd90457f-aa6f-4c26-898a-4e9e8820bc02" class="">
+</p><p id="d921a581-b35c-425d-9f88-b894f57081ac" class="">Free and open to the public</p><p id="9ff7832c-5acd-4603-bb0f-b3db88f29ce7" class="">
+</p><p id="018158c6-608c-40ed-b247-a71ca88d1da6" class=""><strong>Conference Organizers</strong></p><ul id="bd1113be-bc5e-4fc8-9b72-699d99ce078e" class="bulleted-list"><li style="list-style-type:disc">Claudette Lauzon, OCAD University</li></ul><ul id="996be13d-e930-4dff-af55-e84388646550" class="bulleted-list"><li style="list-style-type:disc">John O’Brian, The University of British Columbia</li></ul><p id="cc93b379-20d5-4e8e-9ad8-12632845e37e" class="">
+</p><h1 id="75ea1c87-40cd-4984-a308-b90223f4933a" class="block-color-purple_background">Visual Research </h1><figure id="9cf73ed6-c3d7-4a44-936f-801a448c5ad3" class="image"><a href="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%202.png"><img style="width:1634px" src="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%202.png"/></a></figure><figure id="5c2df513-19d9-4bba-8636-867cf94daeb4"><a href="https://always-hallways.de-ateliers.nl/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Always Hallways</div><div class="bookmark-description">Always Hallways is the website accompanying the 2021 Offspring exhibition of De Ateliers. The website features content organised by the second-year De Ateliers participants which form the background process of their works and tangents that have influenced them. In conversation with the participants, this website is designed by students of the Werkplaats Typografie Master&#x27;s programme in Graphic Design at ArtEZ University of the Arts in Arnhem.</div></div><div class="bookmark-href">https://always-hallways.de-ateliers.nl/</div></div></a></figure><figure id="370c97d3-6713-4b48-9223-b44b029c0c3b" class="image"><a href="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%203.png"><img style="width:1920px" src="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%203.png"/></a><figcaption>inspired by atoms structure</figcaption></figure><div id="9f958824-d0fd-47ab-9e10-d471ef69d855" class="column-list"><div id="da17c196-5503-4e76-ba03-6797459afae3" style="width:50%" class="column"><figure id="aa049cc8-c79c-4823-8e32-ecc758860fe3" class="image"><a href="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%204.png"><img style="width:1076px" src="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%204.png"/></a></figure></div><div id="d4fab257-a3fe-4ced-ae33-06205ce9f01b" style="width:50%" class="column"><figure id="76e7e8fa-b506-4ee2-9074-154079e0c192" class="image"><a href="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%205.png"><img style="width:1622px" src="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%205.png"/></a></figure><p id="66e7dc11-f9a8-4e76-b47e-e2aef907437a" class="">
+</p><p id="5f46422d-7911-4690-90f0-a3500028216a" class="">A ring + a circle</p><p id="ce7e111e-7187-4770-bc6c-7dbf155f2a84" class="">= atom</p><p id="31bfb406-372a-4fe7-96d9-fe71e43cb982" class="">= eye</p><p id="dbbf5c78-3313-4dbf-b364-e77e662684ba" class="">= lens</p></div></div><h1 id="c40d52bd-ec00-4691-b50b-405ccd319cb3" class="block-color-purple_background">Concept </h1><div id="f963c451-5be8-48c4-871f-30e72c970548" class="column-list"><div id="2d42c1bb-8628-455e-949d-ad6858ede045" style="width:30.76923076923077%" class="column"><figure id="8d3fa96b-7d4a-47f8-bacb-fe9b70497e72" class="image"><a href="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%206.png"><img style="width:576px" src="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%206.png"/></a></figure></div><div id="8a344147-c055-438b-b972-39341d3b3a3d" style="width:25%" class="column"><figure id="f73fde00-af27-4437-bda0-d7c6bad6dd6e" class="image"><a href="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%207.png"><img style="width:336px" src="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%207.png"/></a></figure></div><div id="a3f5adf9-762b-4b13-b3cf-a9c2b61d52fa" style="width:44.230769230769226%" class="column"><p id="b2c07552-dc23-4eff-aa93-ad7c7f6191f9" class="">PP Fragment is born from vintage lettering and signs, bridging 19th-century letterforms and contemporary typography </p><figure id="4181cbd6-bc06-4615-907b-5a630f9c43ff"><a href="https://pangrampangram.com/products/fragment" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Fragment</div><div class="bookmark-description">PP Fragment is born from vintage lettering and signs, bridging 19th-century letterforms and contemporary typography ● Pangram Pangram’s 35th release uses the latest technology, gracefully oscillating between an elegant, highly contrasted Serif face, a revival mid-serif called Glare, and a strong Sans, each with distinct features yet perfectly complementary.It comes in 4 preset cuts, Sans, Serif, Glare, and Text, each with unique personalities and quirks. Each weight counts 581 glyphs with plenty of alternate symbols to achieve the best-desired result for your next design.Its power and versatility also comes from its 32 very distinct and unique weights plus italics! These weights were carefully crafted and cut for maximum breath of ability ▲ PP Fragment doesn’t disappoint and will surely be one of your best tools in your next design endeavour.</div></div><div class="bookmark-href"><img src="https://pangrampangram.com/cdn/shop/t/41/assets/apple-touch-icon.png?34041" class="icon bookmark-icon"/>https://pangrampangram.com/products/fragment</div></div><img src="https://cdn.shopify.com/s/files/1/2642/6578/products/Aa-Fragment-Glare_e232e570-3051-4373-a30d-4ed3a6ad2dec.jpg?v=1654715699" class="bookmark-image"/></a></figure><figure id="bd67d36f-fee5-46b3-a9a4-0d52bc8916bb"><a href="https://pp-fragment.com/#glyph-set" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Fragment - A Powerful and Versatile complete Font - Free to Try</div><div class="bookmark-description">Pangram Pangram’s 35th release uses the latest technology, gracefully oscillating between an elegant, highly contrasted Serif face, a revival mid-serif called Glare, and a strong Sans, each with a distinct features yet perfectly complementary.</div></div><div class="bookmark-href"><img src="https://pp-fragment.com/assets/images/favicons/apple-touch-icon.png" class="icon bookmark-icon"/>https://pp-fragment.com/#glyph-set</div></div><img src="https://pp-fragment.com/assets/images/opengraph.png" class="bookmark-image"/></a></figure><p id="464a657a-199f-4945-a2c9-04a340d4e82a" class="">
+</p></div></div><figure id="d50ec0cb-4d60-4107-bbfe-6471d17b6698" class="image"><a href="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%208.png"><img style="width:956px" src="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%208.png"/></a></figure><figure id="2dca8750-0704-4583-9457-e1122428a7ca" class="image"><a href="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%209.png"><img style="width:1946px" src="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%209.png"/></a><figcaption>Final wireframe</figcaption></figure><p id="0a6772a7-ffec-45e4-addc-54d374c0360d" class="">
+</p><ul id="d7a5d00e-ef94-48b8-a5ef-fd11d809e883" class="bulleted-list"><li style="list-style-type:disc">at first i wanted to make the curser like this: so that when it hovers on the red spot, it looks like a target (shooting that relates to war; and focal point that relates to photography)<ul id="3d1bc8d7-e8de-4392-a6e9-b55bbcaa15f5" class="bulleted-list"><li style="list-style-type:circle">but i worked on the project so slowly and didn’t apply in the end</li></ul></li></ul><figure id="882a5daa-5c95-4504-9d11-2ca0b636ec83" class="image"><a href="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%2010.png"><img style="width:1002px" src="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%2010.png"/></a></figure><ul id="206f3a29-31cf-4b74-ab0b-698f1bf93614" class="bulleted-list"><li style="list-style-type:disc">the viewfinder: photography &amp; lens-baased art, layout referencing to <a href="https://postfamiliar.com/">post familiar wine</a></li></ul><figure id="4773d3ce-2307-4cb1-b5c7-b7bc45847dc4" class="image"><a href="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%2011.png"><img style="width:1150px" src="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%2011.png"/></a></figure><figure id="18ccd456-18eb-44d7-b69a-c0b40d20c2ce" class="image"><a href="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%2012.png"><img style="width:1050px" src="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%2012.png"/></a><figcaption>first draft</figcaption></figure><ul id="681b0206-a0fd-44f9-bc5d-a13f15a2054b" class="bulleted-list"><li style="list-style-type:disc">continue with the viewfinder, the different dots direct to the details<ul id="1ff215e8-5384-449d-b2ea-19301253eedd" class="bulleted-list"><li style="list-style-type:circle">i tried to make the details stay on the same page (not as another html link) but that involves js, so I took some time to figure it out (but failed 😅)</li></ul></li></ul><div id="6242a18a-70bb-40e6-84d3-cdcf35b73517" class="column-list"><div id="93b4c2b0-fcdb-4bd5-b139-5bca706ce24d" style="width:50%" class="column"><figure id="957454b8-55e8-42a7-ad3f-ad26bed034a1" class="image"><a href="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%2013.png"><img style="width:832px" src="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%2013.png"/></a></figure></div><div id="f53fdb45-c82e-4835-a151-b874bcb1fbeb" style="width:50%" class="column"><figure id="75ff42e0-9a6f-4ddf-964d-d43bd1f8f656" class="image"><a href="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%2014.png"><img style="width:852px" src="Poster%20Process%204c40f5120cae4b9299db50023f2e91c1/Untitled%2014.png"/></a></figure></div></div><h1 id="e05d4376-5b8e-4698-9a68-c123c9881997" class="">Challenges</h1><ul id="4f00e0db-8914-4b7c-8402-1b1647c77247" class="bulleted-list"><li style="list-style-type:disc">managing the types because they are all in the same family, but got many files<ul id="96607922-ccfa-42a3-bc77-93c61e76c325" class="bulleted-list"><li style="list-style-type:circle">couldn’t make the extra-bold effect → but just add a CSS rule stating extra bold is ok</li></ul></li></ul><ul id="239191ab-9634-4e4e-98d2-ff2423a87cf6" class="bulleted-list"><li style="list-style-type:disc">100vh doesn’t equal to screen size :O</li></ul><ul id="2b06ced4-a1d2-4925-ab53-bc31456fdf3c" class="bulleted-list"><li style="list-style-type:disc">trying to make the web responsive: at first I use absolute positioning, but have to change to vw/vh and repositioning the elements again</li></ul><h1 id="1b3d24a0-aaf4-4892-8128-6c5158be029d" class="">References</h1><p id="49da6290-99d0-4439-95cc-f7a37a650cd8" class=""><a href="https://www.pagecloud.com/blog/how-to-add-custom-fonts-to-any-website">https://www.pagecloud.com/blog/how-to-add-custom-fonts-to-any-website</a></p><p id="ff8ca0f5-07bb-43fa-9303-19724a077ec2" class=""><a href="https://stackoverflow.com/questions/73599621/css-remove-the-bounce-effect">https://stackoverflow.com/questions/73599621/css-remove-the-bounce-effect</a></p><p id="fdc2feed-5f35-4c84-a05b-59128947c3c2" class=""><a href="https://theme.co/forum/t/change-font-style-mid-sentence/61566/2">https://theme.co/forum/t/change-font-style-mid-sentence/61566/2</a></p><p id="3ada62e7-008e-4507-88c4-92caf5132e80" class=""><a href="https://dev.to/suprabhasupi/css-box-shadow-2c5e">https://dev.to/suprabhasupi/css-box-shadow-2c5e</a></p><p id="8d29e9a8-a43a-4fae-8e7c-cc928d68f735" class=""><a href="https://stackoverflow.com/questions/1137517/how-to-position-absolute-inside-a-div">https://stackoverflow.com/questions/1137517/how-to-position-absolute-inside-a-div</a><br/><br/><a href="https://medium.com/developer-rants/what-if-height-100vh-is-bigger-than-your-screen-7f39c62ac170">https://medium.com/developer-rants/what-if-height-100vh-is-bigger-than-your-screen-7f39c62ac170</a></p><p id="3c5b78f2-147b-4f7a-8767-74d837baac59" class=""><a href="https://www.w3schools.com/cssref/pr_dim_line-height.php">https://www.w3schools.com/cssref/pr_dim_line-height.php</a></p><p id="f5032a73-89b0-4dc0-bace-c140c5e6f543" class=""><a href="https://www.scaler.com/topics/how-to-link-to-a-specific-part-of-a-page-html/">https://www.scaler.com/topics/how-to-link-to-a-specific-part-of-a-page-html/</a></p><p id="63ce52c1-51f3-4479-8a41-8e11a9e45cf1" class=""><a href="https://css-tricks.com/snippets/css/typewriter-effect/">https://css-tricks.com/snippets/css/typewriter-effect/</a></p><p id="4ad70d23-2eb4-4fab-b9d8-bb5eaa331e03" class=""><a href="https://alvarotrigo.com/blog/css-text-animations/">https://alvarotrigo.com/blog/css-text-animations/</a></p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
